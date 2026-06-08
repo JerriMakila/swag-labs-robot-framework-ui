@@ -62,3 +62,12 @@
 | 44 | Clicking 'Logout' in the hamburger menu should log out the current user and open login page |
 
 ## Site Footer
+
+| Test Case Id | Test Case |
+|---|---|
+| 45 | Product page should have site footer |
+| 46 | Cart page should have site footer |
+| 47 | Checkout page should have site footer |
+| 48 | Site footer should have social media links |
+| 48 | Site footer social media links should lead to their respective social media profile |
+| 49 | Site footer should have footer text |
