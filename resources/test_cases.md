@@ -1,5 +1,5 @@
 # Test Cases For Swag Lab UI
-##Login
+## Login
 |
 Test Case Id
 |
@@ -10,4 +10,3 @@ Test Case
 |
 Logging in with a standard user should succeed
 -
----
