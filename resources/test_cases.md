@@ -57,13 +57,28 @@
 | 39 | Cart items should have 'Remove' button|
 | 40 | Pressing 'Remove' button in a cart item should remove the cart item from the cart |
 | 41 | If cart has more than one item, removing one item should not remove other items |
-| 42 | Cart page should have cart footer module below cart list |
+| 42 | Cart page should have cart footer |
 | 43 | Cart footer module should have buttons 'Continue Shopping' and 'Checkout' |
 | 44 | Pressing 'Continue Shopping' button in cart footer should open Products page |
 | 45 | After pressing 'Continue Shopping' when cart has items, cart icon in the site header should show correct amount of items in the cart |
 | 46 | Cart list should be retained after logging out and back in again |
 | 47 | Pressing 'Checkout' button in cart footer should open Checkout: Your Information page if cart has items |
 | 48 | Pressing 'Checkout' button in cart footer should not open Checkout: Your Information page if cart is empty |
+
+## Checkout - Your Information
+
+| Test Case Id | Test Case |
+|---|---|
+| 49 | Your Information page should have page header with 'Checkout: Your Information' text |
+| 50 | Your Information page should have information form with text fields 'First Name', 'Last Name' and 'Zip/Postal Code' |
+| 51 | Information form should have buttons 'Cancel' and 'Continue' |
+| 52 | Pressing 'Cancel' button in information form should open cart page |
+| 53 | Pressing 'Continue' button in information form should open Checkout - Overview page if every text field in information form is filled |
+| 54 | Pressing 'Continue' in information form when First Name field is empty should show error icon and error message |
+| 55 | Pressing 'Continue' in information form when Last Name field is empty should show error icon and error message |
+| 56 | Pressing 'Continue' in information form when Zip/Postal Code field is empty should show error icon and error message |
+| 57 | Pressing 'Continue' in information form all text fields are empty should show error icon and error message |
+| 58 | Pressing 'X' in error message container closes the container and removes the error icons |
 
 ## Site Header
 
