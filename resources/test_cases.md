@@ -35,6 +35,7 @@
 | 24 | Inventory items should have inventory item price |
 | 25 | Inventory items should have inventory 'Add to cart' button |
 | 26 | Pressing 'Add to cart' button in an inventory item should make the button text change to 'Remove' |
+| 26 | Pressing 'Remove' button in an inventory item should remove the item from cart |
 | 27 | Adding an item to an empty cart should make a red icon with number 1 appear on shopping cart link |
 | 28 | Adding an item to a non-empty cart should increment the number on shopping cart link by one |
 | 29 | Sorting inventory items by 'Names' from A to Z should be selected by default when opening the product page |
@@ -43,12 +44,33 @@
 | 31 | Sorting inventory items by 'Price' from low to high should show the items in ascending order by price |
 | 32 | Sorting inventory items by 'Price' from high to low should show the items in descending order by price |
 
+## Cart Page
+
+| Test Case Id | Test Case |
+|---|---|
+| 33 | Cart page should have page header with 'Your Cart' text |
+| 34 | Cart page should have cart list |
+| 35 | If cart is empty, cart list should only have headers for 'QTY' and 'Description' |
+| 36 | If cart has items, cart list should contain a list item for every added product |
+| 37 | Product info in cart items should be identical to the product info in Products page |
+| 38 | Cart items should show the quantity of the same products added to the cart |
+| 39 | Cart items should have 'Remove' button|
+| 40 | Pressing 'Remove' button in a cart item should remove the cart item from the cart |
+| 41 | If cart has more than one item, removing one item should not remove other items |
+| 42 | Cart page should have cart footer module below cart list |
+| 43 | Cart footer module should have buttons 'Continue Shopping' and 'Checkout' |
+| 44 | Pressing 'Continue Shopping' button in cart footer should open Products page |
+| 45 | After pressing 'Continue Shopping' when cart has items, cart icon in the site header should show correct amount of items in the cart |
+| 46 | Cart list should be retained after logging out and back in again |
+| 47 | Pressing 'Checkout' button in cart footer should open Checkout: Your Information page if cart has items |
+| 48 | Pressing 'Checkout' button in cart footer should not open Checkout: Your Information page if cart is empty |
+
 ## Site Header
 
 | Test Case Id | Test Case |
 |---|---|
-| 33 | Product page should have site header |
-| 34 | Cart page should have site header |
+| 48 | Product page should have site header |
+| 49 | Cart page should have site header |
 | 35 | Checkout page should have site header |
 | 36 | Site header should have hamburger menu button |
 | 37 | Site header should have site header text |
@@ -69,5 +91,5 @@
 | 46 | Cart page should have site footer |
 | 47 | Checkout page should have site footer |
 | 48 | Site footer should have social media links |
-| 48 | Site footer social media links should lead to their respective social media profile |
-| 49 | Site footer should have footer text |
+| 49 | Site footer social media links should lead to their respective social media profile |
+| 50 | Site footer should have footer text |
