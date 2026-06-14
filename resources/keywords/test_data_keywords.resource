@@ -5,7 +5,7 @@ Library    resources/libraries/collection_utils.py
 
 *** Variables ***
 
-${filepath_to_datasources}    resources/datasources/
+${filepath_to_datasources}    resources${/}datasources${/}
 ${hamburger_menu_csv}         hamburger_menu_items
 ${products_csv}               products
 ${sort_dropdown_items_csv}    sort_dropdown_items
