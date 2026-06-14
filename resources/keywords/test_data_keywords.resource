@@ -1,6 +1,7 @@
 *** Settings ***
 
-Library    resources${/}libraries${/}csv_library.py
+Library    resources/libraries/csv_library.py
+Library    resources/libraries/collection_utils.py
 
 *** Variables ***
 
@@ -15,6 +16,12 @@ ${test_user_csv}              test_users
 Get Users
     @{users}=    Read Csv File    filepath=${filepath_to_datasources}    filename=${test_user_csv}
     RETURN    ${users}
+
+Get User By Username
+    [Arguments]    ${username}
+    @{users}=    Get Users
+    ${user}=     Find Dict By Key Value    ${users}    userid    ${username}
+    RETURN    ${user}
 
 Get Hamburger Menu Items
     @{hamburger_menu_items}=    Read Csv File    filepath=${filepath_to_datasources}    filename=${hamburger_menu_csv}
