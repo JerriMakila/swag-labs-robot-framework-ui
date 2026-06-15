@@ -4,12 +4,12 @@
 
 | Test Case Id | Test Case |
 |---|---|
-| 01 | Log in page should have Swag Labs header |
-| 02 | Log in page should have Login module |
+| 01 | Login page should have Swag Labs header |
+| 02 | Login page should have Login module |
 | 03 | Login module should have text fields for username and password |
 | 04 | Login module should have 'Login' button |
 | 05 | Logging in with a standard user using correct username and password should succeed |
-| 06 | Logging in with a standard user using non-existing username should show error message in error message container |
+| 06 | Logging in with non-existing username should show error message in error message container |
 | 07 | Logging in with a standard user using correct username and incorrect password should show error message in error message container |
 | 08 | Logging in without entering username should show error message in error message container |
 | 09 | Logging in without entering password should show error message in error message container |
