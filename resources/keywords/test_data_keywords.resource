@@ -29,6 +29,7 @@ Get Hamburger Menu Items
 
 Get Products
     @{products}=    Read Csv File    filepath=${filepath_to_datasources}    filename=${products_csv}
+    @{products}=    Cast Dict Field To Float    data=${products}    key=price_usd
     RETURN    ${products}
 
 Get Sort Dropdown Menu Items
