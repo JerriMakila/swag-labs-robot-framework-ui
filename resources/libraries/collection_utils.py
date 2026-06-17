@@ -6,3 +6,7 @@ def find_dict_by_key_value(data: list, key: str, value: str) -> dict:
     if match is None:
         raise ValueError(f"No match found for {key}='{value}'")
     return match
+
+@keyword
+def are_lists_equal_in_length(list1: list, list2:list) -> bool:
+    return  len(list1) == len(list2)
