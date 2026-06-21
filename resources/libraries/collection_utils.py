@@ -20,3 +20,7 @@ def cast_dict_field_to_float(data: list, key: str) -> list:
     for item in data:
         item[key] = float(item[key])
     return data
+
+@keyword
+def extract_field_from_dicts(data: list, key: str) -> list:
+    return [item[key] for item in data]

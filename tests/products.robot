@@ -1,5 +1,6 @@
 *** Settings ***
 Library     Browser
+Library     Collections
 Variables   resources/variables.py
 
 Resource    resources/keywords/test_data_keywords.resource
@@ -78,6 +79,8 @@ Product page should have inventory container with correct inventory items
         Get Text    css=button[data-test="add-to-cart-sauce-labs-backpack"]    ==    Add to cart
     END
 
+    [Teardown]    Close Context
+
 Pressing 'Add to cart' button in an inventory item should make the button text change to 'Remove' And Pressing It Again Should Make It Read 'Add to cart'
     [Tags]     23
     [Setup]    Login    username=${USER}[userid]    password=${USER}[password]
@@ -87,6 +90,8 @@ Pressing 'Add to cart' button in an inventory item should make the button text c
     Get Text    ${add_to_cart_button}    ==    Remove
     Click    ${add_to_cart_button}
     Get Text    ${add_to_cart_button}    ==    Add to cart
+
+    [Teardown]    Close Context
 
 Adding item to a cart should increment the cart icon count by 1, and removing the items should decrease the count by 1
     [Tags]     24    25    26
@@ -110,8 +115,56 @@ Adding item to a cart should increment the cart icon count by 1, and removing th
     Click    ${add_to_cart_button_0}
     Get Element States    css=a[data-test="shopping-cart-link"] > span[data-test="shopping-cart-badge"]    contains    detached
 
-Sorting inventory items by 'Names' from A to Z should show the items in ascending alphabetical order by product name
+    [Teardown]    Close Context
+
+Sorting inventory items by 'Names' from A to Z should list the items in ascending alphabetical order by product name
     [Tags]     27    28
     [Setup]    Login    username=${USER}[userid]    password=${USER}[password]
 
-    LOG    LOL
+    Get Text    css=span.select_container > span[data-test="active-option"]    ==    Name (A to Z)
+    ${expected_products}=           Get Products
+    ${expected_products_a_to_z}=    Sort Dicts By Key    data=${expected_products}    key=name
+    ${expecter_product_names}=      Extract Field From Dicts    data=${expected_products_a_to_z}    key=name
+
+    @{actual_names}=       Get List Of Inventory Item Names
+    Lists Should Be Equal    ${actual_names}    ${expecter_product_names}
+
+    [Teardown]    Close Context
+
+Sorting inventory items by 'Names' from Z to A should list the items in descending alphabetical order by product name
+    [Tags]     29
+    [Setup]    Login    username=${USER}[userid]    password=${USER}[password]
+
+    Select Options By    css=select[data-test="product-sort-container"]    value    za
+    Get Text    css=span.select_container > span[data-test="active-option"]    ==    Name (Z to A)
+
+    ${expected_products}=           Get Products
+    ${expected_products_z_to_a}=    Sort Dicts By Key    data=${expected_products}    key=name    reverse=${TRUE}
+    ${expecter_product_names}=      Extract Field From Dicts    data=${expected_products_z_to_a}    key=name
+
+    @{actual_names}=       Get List Of Inventory Item Names
+    Lists Should Be Equal    ${actual_names}    ${expecter_product_names}
+
+    [Teardown]    Close Context
+
+Sorting inventory items by 'Price' from low to high should show the items in ascending order by price
+    [Tags]     30
+    [Setup]    Login    username=${USER}[userid]    password=${USER}[password]
+
+    Select Options By    css=select[data-test="product-sort-container"]    value    lohi
+    Get Text    css=span.select_container > span[data-test="active-option"]    ==    Price (low to high)
+
+    ${expected_products}=           Get Products
+    ${expected_products_low_to_high}=    Sort Dicts By Key    data=${expected_products}    key=price_usd
+    ${expecter_product_names}=      Extract Field From Dicts    data=${expected_products_low_to_high}    key=price_usd
+
+    @{actual_names}=       Get List Of Inventory Item Names
+    Lists Should Be Equal    ${actual_names}    ${expecter_product_names}
+
+    [Teardown]    Close Context
+
+*** Keywords ***
+
+Get List Of Inventory Item Names
+    @{names}=    Evaluate JavaScript    css=.inventory_list    (el) => Array.from(el.querySelectorAll('.inventory_item_name')).map(span => span.textContent)
+    RETURN    ${names}
