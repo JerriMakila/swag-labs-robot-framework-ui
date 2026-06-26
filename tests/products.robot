@@ -37,8 +37,10 @@ Dropdown menu for sorting options should have correct items
     [Tags]     15
     [Setup]    Login    username=${USER}[userid]    password=${USER}[password]
 
-    @{actual_sorting_options}=      Get Select Options    css=select[data-test="product-sort-container"]
-    @{expected_sorting_options}=    Get Sort Dropdown Menu Items
+    @{actual_sorting_options}=       Get Select Options    css=select[data-test="product-sort-container"]
+    @{expected_sorting_options}=     Get Sort Dropdown Menu Items
+    ${are_lists_equal_in_length}=    Are Lists Equal In Length    ${expected_sorting_options}    ${actual_sorting_options}
+    Should Be True    ${are_lists_equal_in_length}
 
     FOR    ${actual_sorting_option}    IN    @{actual_sorting_options}
         ${expected_sorting_option}=    Find Dict By Key Value    data=${expected_sorting_options}    key=value    value=${actual_sorting_option}[value]
@@ -48,7 +50,7 @@ Dropdown menu for sorting options should have correct items
     [Teardown]    Close Context
 
 Product page should have inventory container with correct inventory items
-    [Tags]     16    17    18    19    20    21    22    23
+    [Tags]     16    17    18    19    20    21    22
     [Setup]    Login    username=${USER}[userid]    password=${USER}[password]
 
     # 16
@@ -72,11 +74,12 @@ Product page should have inventory container with correct inventory items
         Get Element States    ${actual_inventory_item} >> css=div[data-test="inventory-item-desc"]    contains    visible
         Get Text    ${actual_inventory_item} >> css=div[data-test="inventory-item-desc"]    ==    ${expected_inventory_item}[description]
         # 21
+        ${expected_price}=    Evaluate    "$%.2f" % ${expected_inventory_item}[price_usd]
         Get Element States    ${actual_inventory_item} >> css=div[data-test="inventory-item-price"]    contains    visible
-        Get Text    ${actual_inventory_item} >> css=div[data-test="inventory-item-price"]    ==    $${expected_inventory_item}[price_usd]
+        Get Text    ${actual_inventory_item} >> css=div[data-test="inventory-item-price"]    ==    ${expected_price}
         # 22
-        Get Element States    ${actual_inventory_item} >> css=button[data-test="add-to-cart-sauce-labs-backpack"]
-        Get Text    css=button[data-test="add-to-cart-sauce-labs-backpack"]    ==    Add to cart
+        Get Element States    ${actual_inventory_item} >> css=button.btn_inventory    contains    visible
+        Get Text    ${actual_inventory_item} >> css=button.btn_inventory    ==    Add to cart
     END
 
     [Teardown]    Close Context
@@ -124,10 +127,10 @@ Sorting inventory items by 'Names' from A to Z should list the items in ascendin
     Get Text    css=span.select_container > span[data-test="active-option"]    ==    Name (A to Z)
     ${expected_products}=           Get Products
     ${expected_products_a_to_z}=    Sort Dicts By Key    data=${expected_products}    key=name
-    ${expecter_product_names}=      Extract Field From Dicts    data=${expected_products_a_to_z}    key=name
+    ${expected_product_names}=      Extract Field From Dicts    data=${expected_products_a_to_z}    key=name
 
     @{actual_names}=       Get List Of Inventory Item Names
-    Lists Should Be Equal    ${actual_names}    ${expecter_product_names}
+    Lists Should Be Equal    ${actual_names}    ${expected_product_names}
 
     [Teardown]    Close Context
 
@@ -140,10 +143,10 @@ Sorting inventory items by 'Names' from Z to A should list the items in descendi
 
     ${expected_products}=           Get Products
     ${expected_products_z_to_a}=    Sort Dicts By Key    data=${expected_products}    key=name    reverse=${TRUE}
-    ${expecter_product_names}=      Extract Field From Dicts    data=${expected_products_z_to_a}    key=name
+    ${expected_product_names}=      Extract Field From Dicts    data=${expected_products_z_to_a}    key=name
 
     @{actual_names}=       Get List Of Inventory Item Names
-    Lists Should Be Equal    ${actual_names}    ${expecter_product_names}
+    Lists Should Be Equal    ${actual_names}    ${expected_product_names}
 
     [Teardown]    Close Context
 
@@ -156,10 +159,26 @@ Sorting inventory items by 'Price' from low to high should show the items in asc
 
     ${expected_products}=           Get Products
     ${expected_products_low_to_high}=    Sort Dicts By Key    data=${expected_products}    key=price_usd
-    ${expecter_product_names}=      Extract Field From Dicts    data=${expected_products_low_to_high}    key=price_usd
+    ${expected_product_names}=      Extract Field From Dicts    data=${expected_products_low_to_high}    key=name
 
     @{actual_names}=       Get List Of Inventory Item Names
-    Lists Should Be Equal    ${actual_names}    ${expecter_product_names}
+    Lists Should Be Equal    ${actual_names}    ${expected_product_names}
+
+    [Teardown]    Close Context
+
+Sorting inventory items by 'Price' from high to low should show the items in descending order by price
+    [Tags]     31
+    [Setup]    Login    username=${USER}[userid]    password=${USER}[password]
+
+    Select Options By    css=select[data-test="product-sort-container"]    value    hilo
+    Get Text    css=span.select_container > span[data-test="active-option"]    ==    Price (high to low)
+
+    ${expected_products}=           Get Products
+    ${expected_products_low_to_high}=    Sort Dicts By Key    data=${expected_products}    key=price_usd    reverse=True
+    ${expected_product_names}=      Extract Field From Dicts    data=${expected_products_low_to_high}    key=name
+
+    @{actual_names}=       Get List Of Inventory Item Names
+    Lists Should Be Equal    ${actual_names}    ${expected_product_names}
 
     [Teardown]    Close Context
 
