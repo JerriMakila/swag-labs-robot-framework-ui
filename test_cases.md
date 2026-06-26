@@ -31,9 +31,9 @@
 | 20 | Inventory items should have inventory item description |
 | 21 | Inventory items should have inventory item price |
 | 22 | Inventory items should have inventory 'Add to cart' button |
-| 23 | Pressing 'Add to cart' button in an inventory item should make the button text change to 'Remove' |
-| 24 | Pressing 'Remove' button in an inventory item should remove the item from cart |
-| 25 | Adding an item to an empty cart should make a red icon with number 1 appear on shopping cart link |
+| 23 | Pressing 'Add to cart' button in an inventory item should make the button text change to 'Remove' And Pressing It Again Should Make It Read 'Add to cart' |
+| 24 | Adding an item to an empty cart should make a red icon with number 1 appear on shopping cart link |
+| 25 | Pressing 'Remove' button in an inventory item should remove the item from cart |
 | 26 | Adding an item to a non-empty cart should increment the number on shopping cart link by one |
 | 27 | Sorting inventory items by 'Names' from A to Z should be selected by default when opening the product page |
 | 28 | Sorting inventory items by 'Names' from A to Z should show the items in ascending alphabetical order by product name |

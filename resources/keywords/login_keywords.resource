@@ -1,12 +1,11 @@
 *** Settings ***
 Library      Browser
-Variables    resources/variables.py
 
 *** Keywords ***
 
 Open Login Page
     New Context    viewport={'width':1920, 'height': 1080}
-    New Page       ${login_url}
+    New Page       ${LOGIN_URL}
 
 Login
     [Arguments]    ${username}=${EMPTY}    ${password}=${EMPTY}

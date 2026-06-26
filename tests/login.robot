@@ -1,11 +1,20 @@
 *** Settings ***
+Library     Browser
 Variables   resources/variables.py
 
 Resource    resources/keywords/login_keywords.resource
 Resource    resources/keywords/test_data_keywords.resource
 
-Suite Setup       New Browser    browser=chromium    headless=false
+Suite Setup       New Browser    browser=${BROWSER}    headless=${HEADLESS}
 Suite Teardown    Close Browser
+
+*** Variables ***
+
+${standard_user}        standard_user
+${non_existing_user}    non_existing_user
+${wrong_password}       wrong_password
+${default_password}     default_password
+${locked_out_user}      locked_out_user
 
 *** Test Cases ***
 
@@ -39,7 +48,7 @@ Login Page Should Have Correct Elements In Place
 Logging in with a standard user using correct username and password should succeed
     [Tags]     05
 
-    VAR    ${username}    standard_user
+    VAR    ${username}    ${standard_user}
     &{user}=    Get User By Username    username=${username}
     Login    username=${user}[userid]    password=${user}[password]
     Get Text    css=.title    ==    Products
@@ -47,8 +56,8 @@ Logging in with a standard user using correct username and password should succe
 Logging in with non-existing username should show error message in error message container
     [Tags]     06
 
-    VAR    ${username}    non_existing_user
-    VAR    ${password}    secret_sauce
+    VAR    ${username}    ${non_existing_user}
+    VAR    ${password}    ${default_password}
 
     Login    username=${username}    password=${password}
     Get Element States    css=h3[data-test="error"]
@@ -60,8 +69,8 @@ Logging in with non-existing username should show error message in error message
 Logging in with a standard user using correct username and incorrect password should show error message in error message container
     [Tags]     07
 
-    VAR    ${username}    standard_user
-    VAR    ${password}    wrong_password
+    VAR    ${username}    ${standard_user}
+    VAR    ${password}    ${wrong_password}
 
     Login    username=${username}    password=${password}
     Get Element States    css=h3[data-test="error"]
@@ -73,7 +82,7 @@ Logging in with a standard user using correct username and incorrect password sh
 Logging in without entering username should show error message in error message container
     [Tags]     08
 
-    VAR    ${password}    secret_sauce
+    VAR    ${password}    ${default_password}
 
     Login    password=${password}
     Get Element States    css=h3[data-test="error"]
@@ -83,7 +92,7 @@ Logging in without entering username should show error message in error message 
 Logging in without entering password should show error message in error message container
     [Tags]    09
 
-    VAR    ${username}    standard_user
+    VAR    ${username}    ${standard_user}
 
     Login    username=${username}
     Get Element States    css=h3[data-test="error"]

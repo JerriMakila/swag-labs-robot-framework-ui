@@ -1,5 +1,5 @@
-order,item
-1,Name (A to Z)
-2,Name (Z to A)
-3,Price (low to high)
-4,Price (high to low)
+index,value,item
+0,az,Name (A to Z)
+1,za,Name (Z to A)
+2,lohi,Price (low to high)
+3,hilo,Price (high to low)

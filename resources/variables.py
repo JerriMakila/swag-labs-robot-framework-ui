@@ -1,1 +1,3 @@
-login_url = 'https://www.saucedemo.com/'
+BROWSER = 'chromium'
+HEADLESS = 'false'
+LOGIN_URL = 'https://www.saucedemo.com/'
