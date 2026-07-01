@@ -39,8 +39,7 @@ Dropdown menu for sorting options should have correct items
 
     @{actual_sorting_options}=       Get Select Options    css=select[data-test="product-sort-container"]
     @{expected_sorting_options}=     Get Sort Dropdown Menu Items
-    ${are_lists_equal_in_length}=    Are Lists Equal In Length    ${expected_sorting_options}    ${actual_sorting_options}
-    Should Be True    ${are_lists_equal_in_length}
+    Lists Should Be Equal In Length    ${expected_sorting_options}    ${actual_sorting_options}
 
     FOR    ${actual_sorting_option}    IN    @{actual_sorting_options}
         ${expected_sorting_option}=    Find Dict By Key Value    data=${expected_sorting_options}    key=value    value=${actual_sorting_option}[value]
@@ -59,8 +58,7 @@ Product page should have inventory container with correct inventory items
     # 17
     @{expected_inventory_items}      Get Products
     @{actual_inventory_items}=       Get Elements    css=.inventory_list > .inventory_item
-    ${are_lists_equal_in_length}=    Are Lists Equal In Length    ${expected_inventory_items}    ${actual_inventory_items}
-    Should Be True    ${are_lists_equal_in_length}
+    Lists Should Be Equal In Length    ${expected_inventory_items}    ${actual_inventory_items}
 
     FOR    ${actual_inventory_item}    IN    @{actual_inventory_items}
         Get Element States    ${actual_inventory_item}    contains    visible

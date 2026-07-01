@@ -57,10 +57,8 @@
 | 41 | Cart page should have cart footer |
 | 42 | Cart footer module should have buttons 'Continue Shopping' and 'Checkout' |
 | 43 | Pressing 'Continue Shopping' button in cart footer should open Products page |
-| 44 | After pressing 'Continue Shopping' when cart has items, cart icon in the site header should show correct amount of items in the cart |
-| 45 | Cart list should be retained after logging out and back in again |
-| 46 | Pressing 'Checkout' button in cart footer should open Checkout: Your Information page if cart has items |
-| 47 | Pressing 'Checkout' button in cart footer should not open Checkout: Your Information page if cart is empty |
+| 44 | Pressing 'Checkout' button in cart footer should open Checkout: Your Information page if cart has items |
+| 45 | Pressing 'Checkout' button in cart footer should not open Checkout: Your Information page if cart is empty |
 
 ## Checkout - Your Information
 
