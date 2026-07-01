@@ -15,7 +15,6 @@ Suite Teardown    Close Browser
 
 ${test_user}    standard_user
 ${USER}         ${NONE}
-${CART_URL}     https://www.saucedemo.com/cart.html
 
 *** Test Cases ***
 
@@ -86,6 +85,8 @@ Pressing 'Remove' button in a cart item should remove the cart item from the car
     END
 
     Get Element Count    css=div[data-test="cart-list"] >> div[data-test="inventory-item"]    ==    0
+
+    [Teardown]    Clear Cart
 
 If cart has more than one item, removing one item should not remove other items
     [Tags]    40
