@@ -130,7 +130,3 @@ Open Checkout Your Information
     Open Cart Page
     ${checkout_button}=    Get Element    css=div.cart_footer >> button[data-test="checkout"]
     Click    ${checkout_button}
-
-Add Item To Cart
-    ${add_to_cart_button}=    Get Element    css=.btn_inventory >> nth=0
-    Click    ${add_to_cart_button}

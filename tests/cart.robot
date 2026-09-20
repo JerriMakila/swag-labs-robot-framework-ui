@@ -134,23 +134,6 @@ Pressing 'Checkout' button in cart footer should not open Checkout: Your Informa
     Get Text    css=span[data-test="title"]    ==    Your Cart
 
 *** Keywords ***
-
-Get Dict List Of Inventory Items
-    [Arguments]    ${inventory_item_elements}
-
-    @{inventory_item_dictionaries}=    Create List
-    FOR    ${inventory_item_element}    IN    @{inventory_item_elements}
-        ${inventory_item_name}=     Get Text    ${inventory_item_element} >> div[data-test="inventory-item-name"]
-        ${inventory_item_desc}=     Get Text    ${inventory_item_element} >> div[data-test="inventory-item-desc"]
-        ${inventory_item_price}=    Get Text    ${inventory_item_element} >> div[data-test="inventory-item-price"]
-        &{inventory_item_dictionary}=    Create Dictionary
-        ...    name=${inventory_item_name}
-        ...    description=${inventory_item_desc}
-        ...    price=${inventory_item_price}
-        Append To List    ${inventory_item_dictionaries}    ${inventory_item_dictionary}
-    END
-
-    RETURN    ${inventory_item_dictionaries}
     
 Clear Cart
     Go To    ${CART_URL}
