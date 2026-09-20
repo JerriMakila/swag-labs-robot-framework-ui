@@ -135,9 +135,6 @@ Pressing 'Checkout' button in cart footer should not open Checkout: Your Informa
 
 *** Keywords ***
 
-Open Cart Page
-    Click    css=a[data-test="shopping-cart-link"]
-
 Get Dict List Of Inventory Items
     [Arguments]    ${inventory_item_elements}
 
