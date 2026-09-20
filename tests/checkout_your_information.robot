@@ -58,9 +58,7 @@ Pressing 'Continue' button in information form should open Checkout - Overview p
     [Setup]    Run Keywords    Login    username=${USER}[userid]    password=${USER}[password]    AND
     ...        Open Checkout Your Information
 
-    Fill Checkout Form With Default Values
-    ${continue_button}=    Get Element    css=div[data-test="checkout-info-container"] >> .checkout_buttons >> input[data-test="continue"]
-    Click    ${continue_button}
+    Fill Checkout Form With Default Values And Continue
     Get Text    css=.header_secondary_container >> css=span[data-test="title"]    ==    Checkout: Overview
 
     [Teardown]    Close Context
@@ -72,11 +70,10 @@ Pressing 'Continue' in information form when First Name field is empty should sh
 
     Fill Text    css=input[data-test="lastName"]      Doe
     Fill Text    css=input[data-test="postalCode"]    12345
-    ${continue_button}=    Get Element    css=div[data-test="checkout-info-container"] >> .checkout_buttons >> input[data-test="continue"]
-    Click    ${continue_button}
+    Click        css=div[data-test="checkout-info-container"] >> .checkout_buttons >> input[data-test="continue"]
 
     Get Element States    css=div[data-test="checkout-info-container"] >> .error-message-container >> h3[data-test="error"]    contains    visible
-    Get Text              .error-message-container >> h3[data-test="error"]    ==    Error: First Name is required
+    Get Text              css=.error-message-container >> h3[data-test="error"]    ==    Error: First Name is required
 
     [Teardown]    Close Context
 
@@ -87,11 +84,10 @@ Pressing 'Continue' in information form when Last Name field is empty should sho
 
     Fill Text    css=input[data-test="firstName"]     John
     Fill Text    css=input[data-test="postalCode"]    12345
-    ${continue_button}=    Get Element    css=div[data-test="checkout-info-container"] >> .checkout_buttons >> input[data-test="continue"]
-    Click    ${continue_button}
+    Click        css=div[data-test="checkout-info-container"] >> .checkout_buttons >> input[data-test="continue"]
 
     Get Element States    css=div[data-test="checkout-info-container"] >> .error-message-container >> h3[data-test="error"]    contains    visible
-    Get Text              .error-message-container >> h3[data-test="error"]    ==    Error: Last Name is required
+    Get Text              css=.error-message-container >> h3[data-test="error"]    ==    Error: Last Name is required
 
     [Teardown]    Close Context
 
@@ -102,11 +98,10 @@ Pressing 'Continue' in information form when Zip/Postal Code field is empty shou
 
     Fill Text    css=input[data-test="firstName"]    John
     Fill Text    css=input[data-test="lastName"]     Doe
-    ${continue_button}=    Get Element    css=div[data-test="checkout-info-container"] >> .checkout_buttons >> input[data-test="continue"]
-    Click    ${continue_button}
+    Click        css=div[data-test="checkout-info-container"] >> .checkout_buttons >> input[data-test="continue"]
 
     Get Element States    css=div[data-test="checkout-info-container"] >> .error-message-container >> h3[data-test="error"]    contains    visible
-    Get Text              .error-message-container >> h3[data-test="error"]    ==    Error: Postal Code is required
+    Get Text              css=.error-message-container >> h3[data-test="error"]    ==    Error: Postal Code is required
 
     [Teardown]    Close Context
 
@@ -115,12 +110,11 @@ Pressing 'Continue' in information form when all text fields are empty should sh
     [Setup]    Run Keywords    Login    username=${USER}[userid]    password=${USER}[password]    AND
     ...        Open Checkout Your Information
 
-    ${continue_button}=    Get Element    css=div[data-test="checkout-info-container"] >> .checkout_buttons >> input[data-test="continue"]
-    Click    ${continue_button}
+    Click    css=div[data-test="checkout-info-container"] >> .checkout_buttons >> input[data-test="continue"]
 
     # 56
     Get Element States    css=div[data-test="checkout-info-container"] >> .error-message-container >> h3[data-test="error"]    contains    visible
-    Get Text              .error-message-container >> h3[data-test="error"]    ==    Error: First Name is required
+    Get Text              css=.error-message-container >> h3[data-test="error"]    ==    Error: First Name is required
 
     # 57
     ${error_button}=    Get Element    .error-message-container >> button[data-test="error-button"]
@@ -134,12 +128,9 @@ Pressing 'Continue' in information form when all text fields are empty should sh
 Open Checkout Your Information
     Add Item To Cart
     Open Cart Page
-    ${checkout_button}=    Get Element    css=button[data-test="checkout"]
+    ${checkout_button}=    Get Element    css=div.cart_footer >> button[data-test="checkout"]
     Click    ${checkout_button}
 
 Add Item To Cart
     ${add_to_cart_button}=    Get Element    css=.btn_inventory >> nth=0
     Click    ${add_to_cart_button}
-
-Open Cart Page
-    Click    css=a[data-test="shopping-cart-link"]

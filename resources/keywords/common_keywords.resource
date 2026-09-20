@@ -17,7 +17,11 @@ Lists Should Be Equal In Length
     ${list2_length}=    Get Length    ${list2}
     Should Be Equal As Integers    ${list1_length}    ${list2_length}
 
-Fill Checkout Form With Default Values
+Fill Checkout Form With Default Values And Continue
     Fill Text    css=input[data-test="firstName"]     John
     Fill Text    css=input[data-test="lastName"]      Doe
     Fill Text    css=input[data-test="postalCode"]    12345
+    Click        css=div[data-test="checkout-info-container"] >> .checkout_buttons >> input[data-test="continue"]
+
+Open Cart Page
+    Click    css=a[data-test="shopping-cart-link"]
