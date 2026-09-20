@@ -72,7 +72,7 @@
 | 53 | Pressing 'Continue' in information form when First Name field is empty should show error icon and error message |
 | 54 | Pressing 'Continue' in information form when Last Name field is empty should show error icon and error message |
 | 55 | Pressing 'Continue' in information form when Zip/Postal Code field is empty should show error icon and error message |
-| 56 | Pressing 'Continue' in information form all text fields are empty should show error icon and error message |
+| 56 | Pressing 'Continue' in information form when all text fields are empty should show error icon and error message |
 | 57 | Pressing 'X' in error message container closes the container and removes the error icons |
 
 ## Checkout - Overview
